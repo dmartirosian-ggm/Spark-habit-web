@@ -48,13 +48,12 @@ The post is listed on its hub page, the blog index, and the sitemap automaticall
 
 When the App Store or Google Play listing goes live, set `appStoreUrl` / `playStoreUrl` in `src/site.ts`. Every "Coming soon" button becomes a download link.
 
-## Hosting on GitHub Pages
+## Hosting
 
-`.github/workflows/deploy.yml` builds and deploys on every push to `main`.
+The site is deployed by a GitHub-connected worker that rebuilds on every push to `main`.
 
-1. Repo **Settings → Pages**: Source = **GitHub Actions**.
-2. Custom domain: `sparkhabitsapp.com` (`public/CNAME` sets this). Tick **Enforce HTTPS** once the certificate is issued.
-3. DNS at your registrar:
-   - `A` records for `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - `CNAME` for `www` → `dmartirosian-ggm.github.io`
-4. After the first deploy, submit `https://sparkhabitsapp.com/sitemap-index.xml` in Google Search Console.
+- Build command: `npm run build`
+- Output folder: `dist`
+- Node 22.22 or newer (Astro 7 requires it)
+
+After the first deploy, submit `https://sparkhabitsapp.com/sitemap-index.xml` in Google Search Console.
