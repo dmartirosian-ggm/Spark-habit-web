@@ -1,4 +1,4 @@
-# sparkhabitstracker.com
+# sparkhabitsapp.com
 
 Marketing site, SEO content, free printables, and legal pages for the Spark app. Built with [Astro](https://astro.build) as a fully static site.
 
@@ -53,8 +53,8 @@ When the App Store or Google Play listing goes live, set `appStoreUrl` / `playSt
 `.github/workflows/deploy.yml` builds and deploys on every push to `main`.
 
 1. Repo **Settings → Pages**: Source = **GitHub Actions**.
-2. Custom domain: `sparkhabitstracker.com` (`public/CNAME` sets this). Tick **Enforce HTTPS** once the certificate is issued.
+2. Custom domain: `sparkhabitsapp.com` (`public/CNAME` sets this). Tick **Enforce HTTPS** once the certificate is issued.
 3. DNS at your registrar:
    - `A` records for `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - `CNAME` for `www` → `dmartirosian-ggm.github.io`
-4. After the first deploy, submit `https://sparkhabitstracker.com/sitemap-index.xml` in Google Search Console.
+4. After the first deploy, submit `https://sparkhabitsapp.com/sitemap-index.xml` in Google Search Console.

@@ -1,6 +1,6 @@
 export const SITE = {
   name: 'Spark',
-  url: 'https://sparkhabitstracker.com',
+  url: 'https://sparkhabitsapp.com',
   company: 'GBY Media LLC',
   companyUrl: 'https://gbymedia.co',
   // Set these when the listings go live; the buttons switch from "Coming soon" to links.
