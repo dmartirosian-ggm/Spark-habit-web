@@ -31,7 +31,7 @@ const faqs: Faq[] = [
   },
   {
     q: 'Is Spark free?',
-    a: `Yes. The free plan covers one child, up to five habits, stars, celebrations, the Show view, and one reward goal at a time. Spark Plus (${SITE.price.monthly}/month or ${SITE.price.annual}/year, with a ${SITE.price.trialDays}-day free trial on the annual plan) adds more children and habits, family sharing, full history, and printable charts. Checking off habits is never behind a paywall.`,
+    a: `Yes. The free plan covers one child, up to five habits, stars, celebrations, the Show view, and one reward goal at a time. Spark Plus (${SITE.price.monthly}/month) adds more children and habits, family sharing, full history, and printable charts. Checking off habits is never behind a paywall.`,
   },
   {
     q: 'Can two parents share it?',
@@ -223,9 +223,8 @@ const faqs: Faq[] = [
           </ul>
         </div>
         <div class="plan plus">
-          <h3>Spark Plus <span class="pill">{SITE.price.trialDays} days free</span></h3>
-          <div class="price">{SITE.price.annual} <small>/ year</small></div>
-          <div style="color: var(--muted)">or {SITE.price.monthly} / month</div>
+          <h3>Spark Plus</h3>
+          <div class="price">{SITE.price.monthly} <small>/ month</small></div>
           <ul>
             <li>Unlimited children and habits</li>
             <li>Family sharing: invite other grown-ups</li>
