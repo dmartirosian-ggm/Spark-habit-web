@@ -2,7 +2,7 @@ export const SITE = {
   name: 'Spark',
   url: 'https://sparkhabitstracker.com',
   company: 'GBY Media LLC',
-  email: 'support@sparkhabitstracker.com',
+  companyUrl: 'https://gbymedia.co',
   // Set these when the listings go live; the buttons switch from "Coming soon" to links.
   appStoreUrl: '',
   playStoreUrl: '',

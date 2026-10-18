@@ -9,8 +9,7 @@ export const organization = {
   '@type': 'Organization',
   '@id': `${SITE.url}/#org`,
   name: SITE.company,
-  url: SITE.url,
-  email: SITE.email,
+  url: SITE.companyUrl,
 };
 
 export function mobileApp() {
