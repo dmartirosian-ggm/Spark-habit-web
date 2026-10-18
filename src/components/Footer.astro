@@ -1,0 +1,27 @@
+---
+import { HUB_LINKS } from '../data/nav';
+import { SITE } from '../site';
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand" href="/"><img src="/assets/apple-touch-icon.png" alt="" width="36" height="36" />Spark</a>
+      <p>The chore and reward chart app for toddlers and preschoolers.</p>
+    </div>
+    <nav aria-label="Guides">
+      <h2>Guides</h2>
+      {HUB_LINKS.map((l) => <a href={l.href}>{l.label}</a>)}
+      <a href="/printables/">Free printables</a>
+      <a href="/blog/">All articles</a>
+    </nav>
+    <nav aria-label="Company">
+      <h2>Spark</h2>
+      <a href="/help/">Help</a>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/terms/">Terms of Use</a>
+      <a href={`mailto:${SITE.email}`}>Contact</a>
+    </nav>
+  </div>
+  <div class="wrap fine-print">© {new Date().getFullYear()} {SITE.company}. Spark is a product of {SITE.company}.</div>
+</footer>

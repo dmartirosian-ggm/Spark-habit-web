@@ -1,0 +1,22 @@
+---
+interface Props {
+  label?: string;
+}
+const { label = "Family screen in the Spark app: two children and two grown-ups sharing one chart" } = Astro.props;
+---
+
+<div class="phone" role="img" aria-label={label}>
+    <div class="screen m-ground">
+      <p class="m-h1" style="margin-bottom: 4px">Family</p>
+      <div class="m-small">The Parker family</div>
+      <div class="m-section">Children</div>
+      <div class="m-habit"><span class="m-avatar" style="background: #ffb4a2; width: 36px; height: 36px; font-size: 16px">M</span><span class="name">Mia · 4</span><span class="m-small">5 habits</span></div>
+      <div class="m-habit"><span class="m-avatar" style="background: #a8dadc; width: 36px; height: 36px; font-size: 16px">L</span><span class="name">Leo · 2</span><span class="m-small">3 habits</span></div>
+      <div class="m-section">Grown-ups</div>
+      <div class="m-habit"><span class="m-avatar" style="background: #c9b8ff; width: 36px; height: 36px; font-size: 16px">S</span><span class="name">Sam (you)</span><span class="m-small">Owner</span></div>
+      <div class="m-habit"><span class="m-avatar" style="background: #7fd1ae; width: 36px; height: 36px; font-size: 16px">J</span><span class="name">Jordan</span><span class="m-small">Caregiver</span></div>
+      <span class="m-btn secondary" style="margin-top: 12px">Invite a grown-up</span>
+      <span class="m-btn secondary">Print fridge chart</span>
+      <div class="m-tabs"><span>Today</span><span>Progress</span><span>Rewards</span><span class="on">Family</span></div>
+    </div>
+  </div>

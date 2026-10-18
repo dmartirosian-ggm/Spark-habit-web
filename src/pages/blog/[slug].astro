@@ -1,0 +1,87 @@
+---
+import { getCollection, getEntry, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AppPitch from '../../components/AppPitch.astro';
+import PrintableCard from '../../components/PrintableCard.astro';
+import { getPrintable } from '../../data/printables';
+import { article, breadcrumbList } from '../../lib/schema';
+import { formatDate, isLive, livePosts } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', isLive);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: CollectionEntry<'blog'> };
+const { Content } = await render(post);
+const hub = await getEntry('hubs', post.data.cluster);
+if (!hub) throw new Error(`Post ${post.id} points at missing hub ${post.data.cluster}`);
+const path = `/blog/${post.id}/`;
+const hubPath = `/${hub.id}/`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: hub.data.navLabel, path: hubPath },
+  { name: post.data.title, path },
+];
+const printable = post.data.printable ? getPrintable(post.data.printable) : undefined;
+const siblings = (await livePosts()).filter((p) => p.data.cluster === post.data.cluster && p.id !== post.id).slice(0, 3);
+---
+
+<Base
+  title={post.data.seoTitle ?? post.data.title}
+  description={post.data.description}
+  ogType="article"
+  schema={[
+    breadcrumbList(crumbs),
+    article({
+      headline: post.data.title,
+      description: post.data.description,
+      path,
+      published: post.data.published,
+      updated: post.data.updated,
+    }),
+  ]}
+>
+  <article class="article">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1>{post.data.title}</h1>
+    <p class="meta">
+      {post.data.updated ? `Updated ${formatDate(post.data.updated)}` : formatDate(post.data.published)} · By the Spark team
+    </p>
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      printable && (
+        <section aria-labelledby="post-printable">
+          <h2 id="post-printable">Get the free printable</h2>
+          <div class="printable-grid">
+            <PrintableCard printable={printable} />
+          </div>
+        </section>
+      )
+    }
+
+    <AppPitch heading="Track this routine in Spark" />
+
+    {
+      siblings.length > 0 && (
+        <section class="cluster-posts" aria-labelledby="sibling-title">
+          <h2 id="sibling-title">Keep reading</h2>
+          <ul>
+            {siblings.map((p) => (
+              <li>
+                <a href={`/blog/${p.id}/`}>{p.data.title}</a>
+              </li>
+            ))}
+            <li>
+              <a href={hubPath}>{hub.data.h1}</a>
+            </li>
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</Base>

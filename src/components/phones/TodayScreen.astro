@@ -1,0 +1,33 @@
+---
+interface Props {
+  label?: string;
+}
+const { label = "Today screen in the Spark app: a toddler's morning routine chart with three habits checked off" } = Astro.props;
+---
+
+<div class="phone" role="img" aria-label={label}>
+  <div class="screen m-ground">
+    <div class="m-row m-between">
+      <div>
+        <div class="m-small">Tuesday, Oct 21</div>
+        <p class="m-h1">Good morning!</p>
+      </div>
+      <span class="m-chip"><span class="m-avatar" style="background: #ffb4a2">M</span>Mia</span>
+    </div>
+    <div class="m-card m-row">
+      <div class="m-ring" style="--p: 60"><span>3/5</span></div>
+      <div>
+        <div class="m-title">2 more to go — 4-day streak</div>
+        <div class="m-small">12 stars toward the zoo</div>
+      </div>
+    </div>
+    <div class="m-section">Morning</div>
+    <div class="m-habit is-done"><span class="m-tile t-sky">🦷</span><span class="name">Brush teeth</span><span class="m-check done"></span></div>
+    <div class="m-habit is-done"><span class="m-tile t-peach">👕</span><span class="name">Get dressed</span><span class="m-check done"></span></div>
+    <div class="m-habit is-done"><span class="m-tile t-butter">🥣</span><span class="name">Eat breakfast</span><span class="m-check done"></span></div>
+    <div class="m-section">Bedtime</div>
+    <div class="m-habit"><span class="m-tile t-lilac">📖</span><span class="name">Bedtime story</span><span class="m-check"></span></div>
+    <div class="m-habit"><span class="m-tile t-mint">🌙</span><span class="name">Lights out</span><span class="m-check"></span></div>
+    <div class="m-tabs"><span class="on">Today</span><span>Progress</span><span>Rewards</span><span>Family</span></div>
+  </div>
+</div>

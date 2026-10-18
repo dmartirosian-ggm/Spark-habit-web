@@ -1,0 +1,30 @@
+---
+import { SITE } from '../site';
+
+interface Props {
+  tone?: 'ink' | 'spark';
+}
+const { tone = 'ink' } = Astro.props;
+const stores = [
+  { name: 'App Store', icon: 'apple', url: SITE.appStoreUrl },
+  { name: 'Google Play', icon: 'play', url: SITE.playStoreUrl },
+];
+---
+
+<div class="store-buttons">
+  {
+    stores.map((s) =>
+      s.url ? (
+        <a class:list={['btn', `btn-${tone}`]} href={s.url}>
+          <svg aria-hidden="true"><use href={`#${s.icon}`} /></svg>
+          Download on {s.name}
+        </a>
+      ) : (
+        <span class:list={['btn', `btn-${tone}`, 'is-soon']}>
+          <svg aria-hidden="true"><use href={`#${s.icon}`} /></svg>
+          Coming soon to {s.name}
+        </span>
+      ),
+    )
+  }
+</div>

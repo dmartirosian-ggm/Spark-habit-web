@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { breadcrumbList } from '../../lib/schema';
+import { formatDate, livePosts } from '../../lib/content';
+
+const posts = await livePosts();
+const hubs = (await getCollection('hubs')).sort((a, b) => a.data.order - b.data.order);
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Articles', path: '/blog/' },
+];
+---
+
+<Base
+  title="Parenting Guides for Ages 2–6 | Spark"
+  description="Practical guides for parents of toddlers and preschoolers: chore charts, reward charts, potty training, and bedtime routines."
+  schema={[breadcrumbList(crumbs)]}
+>
+  <div class="article">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1>Guides for parents of 2 to 6 year olds</h1>
+    <p class="lede-sm">Start with one of our four main guides, or browse every article below.</p>
+    <div class="related-grid" style="margin-bottom: 40px">
+      {
+        hubs.map((h) => (
+          <a class="related-card" href={`/${h.id}/`}>
+            <strong>{h.data.navLabel}</strong>
+            <span>{h.data.description}</span>
+          </a>
+        ))
+      }
+    </div>
+    <h2>All articles</h2>
+    <ul class="post-list">
+      {
+        posts.map((p) => (
+          <li>
+            <a href={`/blog/${p.id}/`}>{p.data.title}</a>
+            <span>{formatDate(p.data.published)}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>

@@ -1,0 +1,91 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AppPitch from '../../components/AppPitch.astro';
+import ChartSheet from '../../components/ChartSheet.astro';
+import PrintableCard from '../../components/PrintableCard.astro';
+import { PRINTABLES, type Printable } from '../../data/printables';
+import { HUB_LINKS } from '../../data/nav';
+import { breadcrumbList } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return PRINTABLES.map((printable) => ({ params: { slug: printable.slug }, props: { printable } }));
+}
+
+const { printable: p } = Astro.props as { printable: Printable };
+const path = `/printables/${p.slug}/`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Printables', path: '/printables/' },
+  { name: p.title, path },
+];
+const hub = HUB_LINKS.find((h) => h.href === p.hub);
+const others = PRINTABLES.filter((o) => o.slug !== p.slug).slice(0, 3);
+---
+
+<Base title={p.seoTitle} description={p.description} schema={[breadcrumbList(crumbs)]}>
+  <div class="article printable-page">
+    <div class="no-print">
+      <Breadcrumbs crumbs={crumbs} />
+      <h1>{p.title}</h1>
+      <p class="lede-sm">{p.description}</p>
+      <div class="print-controls">
+        <label>
+          Child’s name
+          <input id="child-name" type="text" maxlength="30" autocomplete="off" placeholder="e.g. Mia" />
+        </label>
+        <button class="btn btn-ink" type="button" id="print-btn">Print or save as PDF</button>
+      </div>
+      <p class="hint">
+        {p.kind === 'weekly' ? 'Tap any step on the chart to change it before printing. ' : 'Tap the reward box to type the reward, or leave it blank to draw one together. '}
+        Prints on US Letter or A4.
+      </p>
+    </div>
+
+    <div class="sheet-scroll">
+      <ChartSheet printable={p} />
+    </div>
+
+    <div class="no-print">
+      <h2>How to use it</h2>
+      <ul class="tips">
+        <li>Hang it at your child’s eye level, near where the routine happens.</li>
+        <li>Go over the pictures together the first few days, and let your child add the sticker.</li>
+        <li>Praise the effort out loud: “You brushed your teeth all by yourself!”</li>
+        {
+          hub && (
+            <li>
+              For more ideas, read our guide to <a href={hub.href}>{hub.label.toLowerCase()}</a>.
+            </li>
+          )
+        }
+      </ul>
+      <AppPitch
+        heading="Never run out of stickers"
+        text="Spark is the same chart on your phone. Tap when it’s done, your child earns a star, and every grown-up in the family sees the same progress."
+      />
+      <h2>More free printables</h2>
+      <div class="printable-grid">
+        {others.map((o) => <PrintableCard printable={o} />)}
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const input = document.getElementById('child-name') as HTMLInputElement | null;
+  const name = document.querySelector<HTMLElement>('[data-child-name]');
+  input?.addEventListener('input', () => {
+    if (name) name.textContent = input.value;
+  });
+  document.getElementById('print-btn')?.addEventListener('click', () => window.print());
+
+  // The sheet is laid out at print width (720px); shrink the preview to fit narrow screens.
+  const sheet = document.getElementById('sheet');
+  const fit = () => {
+    if (!sheet?.parentElement) return;
+    sheet.style.zoom = String(Math.min(1, sheet.parentElement.clientWidth / 720));
+  };
+  fit();
+  window.addEventListener('resize', fit);
+</script>

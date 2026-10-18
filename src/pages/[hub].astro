@@ -1,0 +1,85 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import AppPitch from '../components/AppPitch.astro';
+import RelatedHubs from '../components/RelatedHubs.astro';
+import PrintableCard from '../components/PrintableCard.astro';
+import { getPrintable } from '../data/printables';
+import { article, breadcrumbList } from '../lib/schema';
+import { formatDate, postsByGroup } from '../lib/content';
+
+export async function getStaticPaths() {
+  const hubs = await getCollection('hubs');
+  return hubs.map((hub) => ({ params: { hub: hub.id }, props: { hub } }));
+}
+
+const { hub } = Astro.props as { hub: CollectionEntry<'hubs'> };
+const { Content } = await render(hub);
+const path = `/${hub.id}/`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: hub.data.navLabel, path },
+];
+const groups = await postsByGroup(hub.id);
+const printables = hub.data.printables.map(getPrintable).filter((p) => p !== undefined);
+---
+
+<Base
+  title={hub.data.title}
+  description={hub.data.description}
+  ogType="article"
+  schema={[
+    breadcrumbList(crumbs),
+    article({ headline: hub.data.h1, description: hub.data.description, path, published: hub.data.updated }),
+  ]}
+>
+  <article class="article">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1>{hub.data.h1}</h1>
+    <p class="meta">Updated {formatDate(hub.data.updated)} · By the Spark team</p>
+    <p class="app-note">
+      <img src="/assets/apple-touch-icon.png" alt="" width="28" height="28" />
+      <span>Prefer one tap to a sticker? <a href="/">Spark is a free chore and reward chart app</a> for kids ages 2 to 6.</span>
+    </p>
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      groups.length > 0 && (
+        <section class="cluster-posts" aria-labelledby="posts-title">
+          <h2 id="posts-title">More {hub.data.navLabel.toLowerCase()} guides</h2>
+          {groups.map(([group, posts]) => (
+            <>
+              <h3>{group}</h3>
+              <ul>
+                {posts.map((p) => (
+                  <li>
+                    <a href={`/blog/${p.id}/`}>{p.data.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ))}
+        </section>
+      )
+    }
+
+    {
+      printables.length > 0 && (
+        <section aria-labelledby="hub-printables">
+          <h2 id="hub-printables">Free printables</h2>
+          <div class="printable-grid">
+            {printables.map((p) => (
+              <PrintableCard printable={p} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <AppPitch />
+    <RelatedHubs exclude={path} />
+  </article>
+</Base>

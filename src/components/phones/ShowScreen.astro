@@ -1,0 +1,30 @@
+---
+interface Props {
+  label?: string;
+}
+const { label = "Show view in the Spark app: big habit pictures and a star jar for a 4 year old" } = Astro.props;
+---
+
+<div class="phone" role="img" aria-label={label}>
+  <div class="screen m-sky">
+    <div class="m-row" style="justify-content: center">
+      <span class="m-chip"><span class="m-avatar" style="background: #ffb4a2">M</span>Mia</span>
+    </div>
+    <p class="m-display">Look what you<br />did today!</p>
+    <div class="m-grid">
+      <div class="m-big"><svg class="badge"><use href="#check-badge" /></svg><span class="emo">🦷</span>Brush teeth</div>
+      <div class="m-big"><svg class="badge"><use href="#check-badge" /></svg><span class="emo">👕</span>Get dressed</div>
+      <div class="m-big"><svg class="badge"><use href="#check-badge" /></svg><span class="emo">🥣</span>Breakfast</div>
+      <div class="m-big dim"><span class="emo">📖</span>Story</div>
+      <div class="m-big dim"><span class="emo">🌙</span>Lights out</div>
+    </div>
+    <div class="m-card">
+      <div class="m-row m-between"><span class="m-title">Star jar</span><span class="m-small">12 of 20</span></div>
+      <div class="m-jar">
+        <svg><use href="#star" /></svg><svg><use href="#star" /></svg><svg><use href="#star" /></svg><svg><use href="#star" /></svg><svg><use href="#star" /></svg><svg><use href="#star" /></svg><svg><use href="#star" /></svg><svg><use href="#star" /></svg><svg><use href="#star" /></svg><svg><use href="#star" /></svg>
+        <svg><use href="#star" /></svg><svg><use href="#star" /></svg><svg><use href="#star-empty" /></svg><svg><use href="#star-empty" /></svg><svg><use href="#star-empty" /></svg><svg><use href="#star-empty" /></svg><svg><use href="#star-empty" /></svg><svg><use href="#star-empty" /></svg><svg><use href="#star-empty" /></svg><svg><use href="#star-empty" /></svg>
+      </div>
+      <div class="m-title" style="font-size: 13px">8 more stars for a trip to the zoo!</div>
+    </div>
+  </div>
+</div>

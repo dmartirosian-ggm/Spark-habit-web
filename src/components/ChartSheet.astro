@@ -1,0 +1,67 @@
+---
+import type { Printable } from '../data/printables';
+
+interface Props {
+  printable: Printable;
+}
+const { printable: p } = Astro.props;
+const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+---
+
+<div class="sheet" id="sheet">
+  <div class="sheet-head">
+    <h2>{p.heading}</h2>
+    <p class="sheet-name">Name: <span data-child-name contenteditable="true"></span></p>
+  </div>
+
+  {
+    p.kind === 'weekly' ? (
+      <table class="sheet-week">
+        <thead>
+          <tr>
+            <th scope="col" />
+            {DAYS.map((d) => (
+              <th scope="col">{d}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {[...p.items, { emoji: '', label: '' }].map((item) => (
+            <tr>
+              <th scope="row">
+                <span class="sheet-step">
+                  <span class="sheet-emoji">{item.emoji}</span>
+                  <span contenteditable="true">{item.label}</span>
+                </span>
+              </th>
+              {DAYS.map(() => (
+                <td>
+                  <span class="sheet-slot" />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    ) : (
+      <>
+        <div class="sheet-goal">
+          <span>{p.goalPrompt}</span>
+          <span class="sheet-goal-box" contenteditable="true" />
+        </div>
+        <div class="sheet-stickers" style={`--per-row: ${p.perRow}`}>
+          {Array.from({ length: p.slots }, (_, i) => (
+            <span class:list={['sheet-sticker', { 'is-star': p.slotLabel === 'star' }]}>
+              <span>{i + 1}</span>
+            </span>
+          ))}
+        </div>
+      </>
+    )
+  }
+
+  <p class="sheet-foot">
+    {p.kind === 'weekly' ? 'Add a sticker or a check each time it’s done.' : `One ${p.slotLabel} for each win. When it’s full, you get your reward!`}
+    <span>Free printable from Spark · sparkhabitstracker.com</span>
+  </p>
+</div>

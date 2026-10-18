@@ -1,0 +1,272 @@
+---
+import Base from '../layouts/Base.astro';
+import StoreButtons from '../components/StoreButtons.astro';
+import PrintableCard from '../components/PrintableCard.astro';
+import TodayScreen from '../components/phones/TodayScreen.astro';
+import ShowScreen from '../components/phones/ShowScreen.astro';
+import RewardsScreen from '../components/phones/RewardsScreen.astro';
+import ProgressScreen from '../components/phones/ProgressScreen.astro';
+import FamilyScreen from '../components/phones/FamilyScreen.astro';
+import { PRINTABLES } from '../data/printables';
+import { SITE } from '../site';
+import { faqPage, mobileApp, type Faq } from '../lib/schema';
+
+const routines = [
+  { emoji: '☀️', tint: 'butter', name: 'Morning routine', text: 'Potty, dressed, breakfast, teeth, shoes.', href: '/toddler-routines/' },
+  { emoji: '🌙', tint: 'lilac', name: 'Bedtime routine', text: 'Bath, pajamas, teeth, story, lights out.', href: '/blog/toddler-bedtime-routine/' },
+  { emoji: '🚽', tint: 'sky', name: 'Potty training', text: 'A star for every try, not just every success.', href: '/potty-training-chart/' },
+  { emoji: '🧸', tint: 'peach', name: 'Clean-up and chores', text: 'Toys away, clothes in the hamper, help set the table.', href: '/chore-charts/' },
+  { emoji: '🦷', tint: 'mint', name: 'Brushing teeth', text: 'Morning and night, every day, with no arguing over whose turn it is.', href: '/toddler-routines/' },
+  { emoji: '⭐', tint: 'butter', name: 'Reward goals', text: 'Pick a reward and a star target together.', href: '/reward-charts/' },
+];
+
+const faqs: Faq[] = [
+  {
+    q: 'What age is Spark for?',
+    a: 'Spark is made for kids ages 2 to 6, the years when picture charts and stars work best. Habit suggestions change with your child’s age, from “Use the potty” for 2 year olds to “Pack backpack” for kindergarteners.',
+  },
+  {
+    q: 'Does my child need their own device?',
+    a: 'No. Spark is a parent app: you check off habits on your phone. When it’s time to celebrate, turn your phone around and open the full-screen Show view, which uses big pictures your child can read without words.',
+  },
+  {
+    q: 'Is Spark free?',
+    a: `Yes. The free plan covers one child, up to five habits, stars, celebrations, the Show view, and one reward goal at a time. Spark Plus (${SITE.price.monthly}/month or ${SITE.price.annual}/year, with a ${SITE.price.trialDays}-day free trial on the annual plan) adds more children and habits, family sharing, full history, and printable charts. Checking off habits is never behind a paywall.`,
+  },
+  {
+    q: 'Can two parents share it?',
+    a: 'Yes. With Spark Plus, invite a partner, grandparent, or sitter with a code. Everyone sees the same children, habits, and stars, and one subscription covers the whole family.',
+  },
+  {
+    q: 'Does Spark have ads or tracking?',
+    a: 'No. Spark has no ads and no third-party analytics or advertising SDKs, and we never sell your data.',
+  },
+  {
+    q: 'How do I cancel a subscription?',
+    a: 'Open Settings on your iPhone, tap your name, then Subscriptions, then Spark. Plus stays active until the end of the period you paid for.',
+  },
+];
+---
+
+<Base
+  title="Spark: Chore & Reward Chart App for Toddlers"
+  description="Track chores, routines and potty wins for kids ages 2 to 6. Check off a habit, watch the stars add up, and show your little one how far they've come."
+  schema={[mobileApp(), faqPage(faqs)]}
+  themeColor="#FFF1C7"
+>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">For parents of 2–6 year olds</span>
+        <h1>The chore and reward chart app for toddlers and preschoolers</h1>
+        <p class="lede">
+          Spark is a chore chart app that replaces the sticker chart on the fridge. Set up your child’s morning routine,
+          bedtime, potty training, and chores, then tap each one when it’s done. Every tap is a star toward a reward you
+          pick together, and the full-screen Show view lets your little one see how far they’ve come.
+        </p>
+        <StoreButtons />
+        <p class="fine">Free to use. No ads. Made for parents, so your child never needs their own device.</p>
+      </div>
+      <div class="phones">
+        <TodayScreen />
+        <ShowScreen />
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How Spark works</h2>
+        <p>Set it up in two minutes. After that, it’s one tap per habit.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>Pick habits</h3>
+          <p>
+            Add your child’s name and age, and Spark suggests routines that fit, from “Use the potty” for toddlers to “Pack
+            backpack” for kindergarteners. Choose the days and the time of day for each one.
+          </p>
+        </div>
+        <div class="step">
+          <h3>Tap when done</h3>
+          <p>
+            When a habit is done, tap it. Every tap is a star and a little celebration. A gentle reminder can nudge you in
+            the morning, afternoon, or at bedtime.
+          </p>
+        </div>
+        <div class="step">
+          <h3>Show your child their progress</h3>
+          <p>
+            Turn the phone around. The Show view gives your child big pictures of what they did today and how many stars
+            are left until their reward.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tinted" aria-labelledby="routines-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="routines-title">Routines you can set up in a minute</h2>
+        <p>Start from a ready-made routine or build your own. Each one has a step-by-step guide.</p>
+      </div>
+      <div class="features">
+        {
+          routines.map((r) => (
+            <a class="feature feature-link" href={r.href}>
+              <span class:list={['m-tile', `t-${r.tint}`]} aria-hidden="true">
+                {r.emoji}
+              </span>
+              <h3>{r.name}</h3>
+              <p>{r.text}</p>
+              <span class="card-cta">Read the guide →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="showcase" aria-labelledby="ages-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="ages-title">Built for ages 2 to 6</h2>
+        <p>
+          Toddlers and preschoolers can’t read a list or wait a month for a reward. They understand pictures, and they
+          understand stars they can count. Spark’s <a href="/reward-charts/">reward charts</a> keep goals short and
+          visible, so your child sees progress every day.
+        </p>
+        <p>
+          Spark is parent-only on purpose. There are no games, ads, or accounts for kids. You hold the phone, and your
+          child gets the fun part: the stars and the celebration.
+        </p>
+      </div>
+      <div class="showcase-grid">
+        <div class="shot">
+          <RewardsScreen />
+          <h3>Rewards they understand</h3>
+          <p>Set a goal like “a trip to the zoo” and a star target. When the jar is full, give the reward and start again.</p>
+        </div>
+        <div class="shot">
+          <ProgressScreen />
+          <h3>See the week at a glance</h3>
+          <p>Streaks count the days when every scheduled habit was done. Days off don’t break them.</p>
+        </div>
+        <div class="shot">
+          <FamilyScreen />
+          <h3>The whole family, in sync</h3>
+          <p>Invite a partner, grandparent, or sitter. Whoever checks off a habit, everyone sees the same stars.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="vs-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="vs-title">Spark vs. a paper chart</h2>
+        <p>
+          Paper charts are great, and we make <a href="/printables/">free ones</a> too. But fridge charts get lost,
+          stickers run out, and only the person standing in the kitchen knows what’s been done.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Paper chart</th><th scope="col">Spark</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Stickers and charts to restock</th><td>Every week</td><td>Never</td></tr>
+            <tr><th scope="row">Both parents see what’s done</th><td>Only at home</td><td>Yes, on every phone</td></tr>
+            <tr><th scope="row">Works at grandma’s or on vacation</th><td>If you remember it</td><td>Yes</td></tr>
+            <tr><th scope="row">Reminders</th><td>No</td><td>Morning, afternoon, and bedtime</td></tr>
+            <tr><th scope="row">Streaks and history</th><td>Until it’s thrown away</td><td>Every week, saved</td></tr>
+            <tr><th scope="row">Works without a phone</th><td>Yes</td><td>Print a fridge chart from the app</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="tinted" aria-labelledby="printables-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="printables-title">Free printables</h2>
+        <p>Chore charts, sticker charts, potty charts, and routine charts. Add your child’s name and print.</p>
+      </div>
+      <div class="printable-grid">
+        {PRINTABLES.map((p) => <PrintableCard printable={p} />)}
+      </div>
+      <p style="margin-top: 24px"><a class="btn btn-ghost" href="/printables/">See all printables</a></p>
+    </div>
+  </section>
+
+  <section class="pricing" id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Free to start</h2>
+        <p>The core of Spark is free. Checking off habits is never behind a paywall.</p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <h3>Free</h3>
+          <div class="price">$0</div>
+          <ul>
+            <li>1 child</li>
+            <li>Up to 5 active habits</li>
+            <li>Stars, celebrations, and the Show view</li>
+            <li>This week’s progress</li>
+            <li>1 reward goal at a time</li>
+            <li>Daily reminders</li>
+          </ul>
+        </div>
+        <div class="plan plus">
+          <h3>Spark Plus <span class="pill">{SITE.price.trialDays} days free</span></h3>
+          <div class="price">{SITE.price.annual} <small>/ year</small></div>
+          <div style="color: var(--muted)">or {SITE.price.monthly} / month</div>
+          <ul>
+            <li>Unlimited children and habits</li>
+            <li>Family sharing: invite other grown-ups</li>
+            <li>Full progress history, every week</li>
+            <li>Unlimited reward goals and reward history</li>
+            <li>Per-child reminder times</li>
+            <li>Photo habit icons and a printable fridge chart</li>
+          </ul>
+        </div>
+      </div>
+      <p class="plans-note">
+        One subscription covers the whole household. Payment is charged to your Apple ID. Subscriptions renew
+        automatically unless cancelled at least 24 hours before the end of the current period. Cancel anytime in your App
+        Store settings. Prices are in US dollars and may vary by country. See our <a href="/terms/">Terms of Use</a>.
+      </p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Questions parents ask</h2>
+      </div>
+      <div class="faq">
+        {
+          faqs.map((f) => (
+            <details>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="download">
+    <div class="wrap">
+      <h2>Ready for a few more stars?</h2>
+      <p>Spark is coming soon to iPhone and Android.</p>
+      <StoreButtons tone="spark" />
+    </div>
+  </section>
+</Base>

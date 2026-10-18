@@ -1,0 +1,39 @@
+---
+interface Props {
+  label?: string;
+}
+const { label = "Progress screen in the Spark app: a weekly view and a 4-day routine streak" } = Astro.props;
+---
+
+<div class="phone" role="img" aria-label={label}>
+    <div class="screen m-ground">
+      <p class="m-h1" style="margin-bottom: 4px">Progress</p>
+      <div class="m-small">This week</div>
+      <div class="m-card">
+        <div class="m-row m-between" style="text-align: center; font-size: 11px; font-weight: 800; color: var(--muted)">
+          <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+        </div>
+        <div class="m-row m-between" style="margin-top: 8px">
+          <div class="m-ring" style="--p: 100; width: 28px; height: 28px"><span style="width: 20px; height: 20px"></span></div>
+          <div class="m-ring" style="--p: 100; width: 28px; height: 28px"><span style="width: 20px; height: 20px"></span></div>
+          <div class="m-ring" style="--p: 100; width: 28px; height: 28px"><span style="width: 20px; height: 20px"></span></div>
+          <div class="m-ring" style="--p: 100; width: 28px; height: 28px"><span style="width: 20px; height: 20px"></span></div>
+          <div class="m-ring" style="--p: 60; width: 28px; height: 28px"><span style="width: 20px; height: 20px"></span></div>
+          <div class="m-ring" style="--p: 0; width: 28px; height: 28px"><span style="width: 20px; height: 20px"></span></div>
+          <div class="m-ring" style="--p: 0; width: 28px; height: 28px"><span style="width: 20px; height: 20px"></span></div>
+        </div>
+      </div>
+      <div class="m-card m-row" style="gap: 14px">
+        <span class="m-tile t-butter" style="width: 44px; height: 44px; font-size: 22px">🔥</span>
+        <div>
+          <div class="m-title">4-day streak</div>
+          <div class="m-small">Every habit done, 4 days in a row</div>
+        </div>
+      </div>
+      <div class="m-section">By habit</div>
+      <div class="m-habit"><span class="m-tile t-sky">🦷</span><span class="name">Brush teeth</span><span class="m-small">5/5</span></div>
+      <div class="m-habit"><span class="m-tile t-peach">👕</span><span class="name">Get dressed</span><span class="m-small">5/5</span></div>
+      <div class="m-habit"><span class="m-tile t-lilac">📖</span><span class="name">Bedtime story</span><span class="m-small">4/5</span></div>
+      <div class="m-tabs"><span>Today</span><span class="on">Progress</span><span>Rewards</span><span>Family</span></div>
+    </div>
+  </div>

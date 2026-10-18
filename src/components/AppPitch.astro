@@ -1,0 +1,21 @@
+---
+import StoreButtons from './StoreButtons.astro';
+
+interface Props {
+  heading?: string;
+  text?: string;
+}
+const {
+  heading = 'Track it in Spark',
+  text = 'Paper charts get lost and stickers run out. Spark puts the chart on your phone: tap when it’s done, your child earns a star, and the full-screen Show view lets them see how far they’ve come.',
+} = Astro.props;
+---
+
+<aside class="app-pitch">
+  <img src="/assets/apple-touch-icon.png" alt="" width="56" height="56" />
+  <div>
+    <h2>{heading}</h2>
+    <p>{text} <a href="/">See how the Spark app works</a>.</p>
+    <StoreButtons />
+  </div>
+</aside>

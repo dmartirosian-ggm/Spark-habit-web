@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import AppPitch from '../../components/AppPitch.astro';
+import PrintableCard from '../../components/PrintableCard.astro';
+import { PRINTABLES } from '../../data/printables';
+import { breadcrumbList } from '../../lib/schema';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Printables', path: '/printables/' },
+];
+const weekly = PRINTABLES.filter((p) => p.kind === 'weekly');
+const sticker = PRINTABLES.filter((p) => p.kind === 'sticker');
+---
+
+<Base
+  title="Free Printable Chore Charts & Reward Chart Templates"
+  description="Free printable chore charts, reward charts, sticker charts, potty charts, and routine charts for kids ages 2 to 6. Add a name and print."
+  schema={[breadcrumbList(crumbs)]}
+>
+  <div class="article">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1>Free printable chore charts and reward charts</h1>
+    <p class="lede-sm">
+      Every chart here is free, with no sign-up. Pick a printable chore chart or reward chart, type your child’s name,
+      change any step, and print it or save it as a PDF. They’re designed for kids ages 2 to 6, with a picture on every
+      step so pre-readers can follow along.
+    </p>
+
+    <h2>Chore and routine charts</h2>
+    <p>
+      A weekly chart with a row for each chore or routine step and a space for every day. Use the
+      <a href="/printables/chore-chart/">chore chart template</a> for jobs around the house, or the morning and bedtime
+      charts for daily routines. Not sure which chores fit your child’s age? See our
+      <a href="/chore-charts/">chores by age guide</a>.
+    </p>
+    <div class="printable-grid">
+      {weekly.map((p) => <PrintableCard printable={p} />)}
+    </div>
+
+    <h2>Reward and sticker charts</h2>
+    <p>
+      A single goal with a space for each sticker. Toddlers do best with 5 to 10 spaces so the reward isn’t too far away;
+      4 to 6 year olds can work toward 20. Our <a href="/reward-charts/">reward chart guide</a> covers how to pick
+      rewards that aren’t candy or toys, and the <a href="/potty-training-chart/">potty training chart guide</a> covers
+      what to reward and when.
+    </p>
+    <div class="printable-grid">
+      {sticker.map((p) => <PrintableCard printable={p} />)}
+    </div>
+
+    <h2>Tips for making a chart stick</h2>
+    <ul class="tips">
+      <li>Start small: 3 to 5 steps or one behavior at a time.</li>
+      <li>Put the chart where the routine happens, at your child’s eye level.</li>
+      <li>Give the sticker right away. A sticker at bedtime for something done at breakfast feels like forever to a 3 year old.</li>
+      <li>Never take stickers away. A missed day is just an empty space.</li>
+    </ul>
+
+    <AppPitch
+      heading="Like the chart, without the stickers"
+      text="Spark is the chore and reward chart app version: tap when it’s done, your child earns a star, and the chart is on every grown-up’s phone."
+    />
+  </div>
+</Base>

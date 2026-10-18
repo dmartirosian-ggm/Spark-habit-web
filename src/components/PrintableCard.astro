@@ -1,0 +1,18 @@
+---
+import type { Printable } from '../data/printables';
+
+interface Props {
+  printable: Printable;
+}
+const { printable: p } = Astro.props;
+const icon = p.kind === 'weekly' ? p.items[0].emoji : '⭐';
+---
+
+<a class="printable-card" href={`/printables/${p.slug}/`}>
+  <span class="m-tile t-butter" aria-hidden="true">{icon}</span>
+  <span>
+    <strong>{p.title}</strong>
+    <span>{p.blurb}</span>
+    <span class="card-cta">Free printable →</span>
+  </span>
+</a>

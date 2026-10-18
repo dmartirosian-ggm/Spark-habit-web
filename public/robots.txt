@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sparkhabitstracker.com/sitemap-index.xml

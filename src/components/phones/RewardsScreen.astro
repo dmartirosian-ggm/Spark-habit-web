@@ -1,0 +1,26 @@
+---
+interface Props {
+  label?: string;
+}
+const { label = "Rewards screen in the Spark app: a reward chart with 12 of 20 stars toward a trip to the zoo" } = Astro.props;
+---
+
+<div class="phone" role="img" aria-label={label}>
+    <div class="screen m-ground">
+      <p class="m-h1" style="margin-bottom: 4px">Rewards</p>
+      <div class="m-small">What Mia is working toward</div>
+      <div class="m-goal">
+        <div class="m-small">Current goal</div>
+        <div class="goal-title">A trip to the zoo</div>
+        <div class="m-bar"><span style="width: 60%"></span></div>
+        <div style="font-weight: 800; font-size: 13px">12 of 20 stars · 8 to go</div>
+        <span class="m-btn spark">Give reward</span>
+      </div>
+      <div class="m-section">Up next</div>
+      <div class="m-habit"><span class="m-tile t-peach">🍦</span><span class="name">Ice cream after dinner</span><span class="m-small">10 ★</span></div>
+      <div class="m-section">Given</div>
+      <div class="m-habit"><span class="m-tile t-mint">🎨</span><span class="name">New crayons</span><span class="m-small">15 ★</span></div>
+      <div class="m-habit"><span class="m-tile t-sky">🛝</span><span class="name">Playground trip</span><span class="m-small">10 ★</span></div>
+      <div class="m-tabs"><span>Today</span><span>Progress</span><span class="on">Rewards</span><span>Family</span></div>
+    </div>
+  </div>

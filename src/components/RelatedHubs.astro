@@ -1,0 +1,28 @@
+---
+import { HUB_LINKS } from '../data/nav';
+
+interface Props {
+  exclude?: string;
+}
+const { exclude } = Astro.props;
+const blurbs: Record<string, string> = {
+  '/chore-charts/': 'Age-by-age chores kids 2 to 6 can really do.',
+  '/reward-charts/': 'Sticker and reward charts that work, and rewards that aren’t candy.',
+  '/potty-training-chart/': 'What to reward, when, and how to handle accidents.',
+  '/toddler-routines/': 'Bedtime, morning, and daily schedules by age.',
+};
+---
+
+<section class="related" aria-labelledby="related-title">
+  <h2 id="related-title">Related guides</h2>
+  <div class="related-grid">
+    {
+      HUB_LINKS.filter((l) => l.href !== exclude).map((l) => (
+        <a class="related-card" href={l.href}>
+          <strong>{l.label}</strong>
+          <span>{blurbs[l.href]}</span>
+        </a>
+      ))
+    }
+  </div>
+</section>
