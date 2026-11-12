@@ -250,21 +250,22 @@ p {
 .hero {
   background: var(--butter);
   overflow: hidden;
+  padding: 0;
 }
 
 .hero .wrap {
   display: grid;
-  gap: 40px;
-  padding-top: 56px;
-  padding-bottom: 64px;
+  gap: 32px;
+  padding-top: 32px;
+  padding-bottom: 40px;
   align-items: center;
 }
 
 @media (min-width: 900px) {
   .hero .wrap {
     grid-template-columns: 1.05fr 1fr;
-    padding-top: 80px;
-    padding-bottom: 88px;
+    padding-top: 48px;
+    padding-bottom: 56px;
   }
 }
 
@@ -278,7 +279,7 @@ p {
   font-size: 14px;
   padding: 6px 14px;
   border-radius: 999px;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .hero h1 {
@@ -677,12 +678,18 @@ p {
 
 /* Sections */
 section {
-  padding: 72px 0;
+  padding: 48px 0;
+}
+
+@media (min-width: 900px) {
+  section {
+    padding: 64px 0;
+  }
 }
 
 .section-head {
   max-width: 640px;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
 }
 
 .section-head h2 {
@@ -1148,8 +1155,47 @@ section {
   color: var(--ink);
 }
 
-.btn.is-soon {
-  cursor: default;
+/* App Store badge-style button: two-line label, bigger than a normal button */
+.btn-store {
+  padding: 12px 28px 12px 22px;
+  gap: 12px;
+  font-size: 22px;
+  line-height: 1.1;
+  box-shadow: 0 10px 24px -12px rgba(31, 42, 68, 0.6);
+}
+
+.btn-store svg {
+  width: 28px;
+  height: 28px;
+}
+
+.btn-store small {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+/* Header download button */
+.header-cta {
+  margin-left: auto;
+  padding: 8px 16px;
+  font-size: 15px;
+  gap: 6px;
+}
+
+.header-cta svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (min-width: 900px) {
+  .site-nav {
+    margin-left: auto;
+  }
+  .header-cta {
+    margin-left: 0;
+  }
 }
 
 button.btn {

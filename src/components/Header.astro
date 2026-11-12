@@ -1,5 +1,6 @@
 ---
 import { NAV_LINKS } from '../data/nav';
+import { SITE } from '../site';
 
 const path = Astro.url.pathname;
 const current = (href: string) => (path.startsWith(href) ? 'page' : undefined);
@@ -11,6 +12,14 @@ const current = (href: string) => (path.startsWith(href) ? 'page' : undefined);
     <nav class="site-nav" aria-label="Main">
       {NAV_LINKS.map((l) => <a href={l.href} aria-current={current(l.href)}>{l.label}</a>)}
     </nav>
+    {
+      SITE.appStoreUrl && (
+        <a class="btn btn-ink header-cta" href={SITE.appStoreUrl}>
+          <svg aria-hidden="true"><use href="#apple" /></svg>
+          Download
+        </a>
+      )
+    }
     <details class="menu">
       <summary>Menu</summary>
       <nav aria-label="Main (mobile)">
